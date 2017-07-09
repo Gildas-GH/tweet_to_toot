@@ -2,7 +2,7 @@ module TweetToToot
   class Runner
     attr_accessor :handles, :sleep_time, :logger
 
-    def initialize(mastodon, twitter, handles = nil, sleep_time = 3600)
+    def initialize(mastodon, twitter, handles = nil, sleep_time = 30)
       @mastodon   = mastodon
       @twitter    = twitter
       @handles    = ENV["TWITTER_HANDLES_TO_TOOT"].split(", ")
@@ -11,7 +11,7 @@ module TweetToToot
     end
 
     def format_message(handle, text)
-      "@#{handle}: #{text.gsub(/\n/, " ")}\n#{ENV["HASHTAGS"]}"
+      "#{text.gsub(/\n/, " ")}\n#{ENV["HASHTAGS"]}"
     end
 
     # The main worker method
